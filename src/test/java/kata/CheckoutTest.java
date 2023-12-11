@@ -1,17 +1,18 @@
 package kata;
 
-import com.github.larseckart.tcr.CommitOnGreenExtension;
+import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(CommitOnGreenExtension.class)
+import javax.money.Monetary;
+
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class CheckoutTest {
 
     @Test
     void start_here() {
+        Money money = Money.ofMinor(Monetary.getCurrency("USD"), 50);
 
     }
 }
