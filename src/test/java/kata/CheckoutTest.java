@@ -61,4 +61,15 @@ public class CheckoutTest {
 
         assertThat(checkout.total()).isEqualTo(Money.parse("USD 1.30"));
     }
+
+    @Test
+    void product_b_2_times_then_discount() {
+        Checkout checkout = new Checkout();
+        SKU sku = SKU.of("B");
+
+        checkout.scan(sku);
+        checkout.scan(sku);
+
+        assertThat(checkout.total()).isEqualTo(Money.parse("USD 0.45"));
+    }
 }

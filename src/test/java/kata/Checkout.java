@@ -30,6 +30,9 @@ class Checkout {
         if (scannedItems.stream().filter(sku -> sku.equals(SKU.of("A"))).count() >= 3) {
             total = total.minus(Money.ofMinor(CurrencyUnit.USD, 20));
         }
+        if (scannedItems.stream().filter(sku -> sku.equals(SKU.of("B"))).count() >= 2) {
+            total = total.minus(Money.ofMinor(CurrencyUnit.USD, 15));
+        }
         return total;
     }
 }
