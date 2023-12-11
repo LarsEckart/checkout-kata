@@ -21,3 +21,11 @@ In fact this week’s prices are:
 
 Our checkout accepts items in any order, so that if we scan a B, an A, and another B, we’ll recognize the two B’s 
 and price them at 45 (for a total price so far of 95). 
+
+PS: The project has `joda-money` as dependency, feel free to give it a try.
+
+```java
+Money money = Money.parse("USD 0.50");
+Money money = Money.ofMinor(CurrencyUnit.USD, 50);
+Money money = Money.of(CurrencyUnit.of("USD"), 0.50);
+```
