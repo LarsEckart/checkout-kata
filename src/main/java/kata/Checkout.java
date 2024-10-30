@@ -1,5 +1,7 @@
 package kata;
 
+import java.util.List;
+
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
@@ -7,10 +9,12 @@ class Checkout {
 
     private final Catalogue catalogue;
     private final Cart cart;
+    public Discounts discounts;
 
-    public Checkout(Catalogue catalogue) {
+    public Checkout(Catalogue catalogue, Discounts discounts) {
         this.catalogue = catalogue;
         this.cart = new Cart();
+        this.discounts = discounts;
     }
 
     public void scan(Sku sku) {
@@ -22,18 +26,10 @@ class Checkout {
         for (Sku sku : cart) {
             total = total.plus(catalogue.getPriceFor(sku));
         }
-        total = total.minus(calculateDiscount(cart, Sku.of("A"), 3, Money.of(CurrencyUnit.USD, 20)));
-        total = total.minus(calculateDiscount(cart, Sku.of("B"), 2, Money.of(CurrencyUnit.USD, 15)));
-
-        return total;
-    }
-
-    private Money calculateDiscount(Cart cart, Sku sku, int quantity, Money discount) {
-        if (cart.counts().containsKey(sku) && cart.counts().get(sku) >= quantity) {
-            int times = cart.counts().get(sku) / quantity;
-            return discount.multipliedBy(times);
+        for (Discount discount : discounts) {
+            total = total.minus(discount.calculateDiscount(cart));
         }
-        return Money.zero(CurrencyUnit.USD);
+        return total;
     }
 
 }
