@@ -1,22 +1,20 @@
 package kata;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
 class Checkout {
 
-    private final List<Sku> cart = new ArrayList<>();
-    public Catalogue catalogue;
+    private final Catalogue catalogue;
+    private final Cart cart;
 
     public Checkout(Catalogue catalogue) {
         this.catalogue = catalogue;
+        this.cart = new Cart();
     }
 
     public void scan(Sku sku) {
-        cart.add(sku);
+        cart.addItem(sku);
     }
 
     public Money total() {

@@ -2,7 +2,7 @@ package kata;
 
 import java.util.Objects;
 
-class Sku {
+public final class Sku {
 
     private final String code;
 
