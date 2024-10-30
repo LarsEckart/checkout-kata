@@ -22,7 +22,15 @@ public final class Cart implements Iterable<Sku> {
         cart.add(sku);
     }
 
-    public Map<Sku, Integer> counts() {
+    boolean contains(Sku sku) {
+        return cart.contains(sku);
+    }
+
+    Integer quantityOf(Sku sku1) {
+        return counts().get(sku1);
+    }
+
+    private Map<Sku, Integer> counts() {
         return cart.stream()
                 .collect(groupingBy(sku -> sku, summingInt(_ -> 1)));
     }

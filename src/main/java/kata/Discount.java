@@ -20,9 +20,9 @@ public final class Discount {
     }
 
     public Money calculateDiscount(Cart cart) {
-        if (cart.counts().containsKey(sku)) {
-            if (cart.counts().get(sku) >= quantity) {
-                int times = cart.counts().get(sku) / quantity;
+        if (cart.contains(this.sku)) {
+            if (cart.quantityOf(sku) >= quantity) {
+                int times = cart.quantityOf(sku) / quantity;
                 return discount.multipliedBy(times);
             }
         }

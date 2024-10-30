@@ -1,19 +1,17 @@
 package kata;
 
-import java.util.List;
-
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
 class Checkout {
 
-    private final Catalogue catalogue;
     private final Cart cart;
-    public Discounts discounts;
+    private final Catalogue catalogue;
+    private final Discounts discounts;
 
     public Checkout(Catalogue catalogue, Discounts discounts) {
-        this.catalogue = catalogue;
         this.cart = new Cart();
+        this.catalogue = catalogue;
         this.discounts = discounts;
     }
 
