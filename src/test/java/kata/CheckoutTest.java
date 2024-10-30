@@ -15,4 +15,13 @@ class CheckoutTest {
 
         assertThat(checkout.total()).isEqualTo(Money.of(CurrencyUnit.USD, 50));
     }
+
+    @Test
+    void buyTwoAFor100() {
+        Checkout checkout = new Checkout();
+        checkout.scan(Sku.of("A"));
+        checkout.scan(Sku.of("A"));
+
+        assertThat(checkout.total()).isEqualTo(Money.of(CurrencyUnit.USD, 100));
+    }
 }
