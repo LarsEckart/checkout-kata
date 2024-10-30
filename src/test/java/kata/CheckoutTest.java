@@ -36,6 +36,22 @@ class CheckoutTest {
     }
 
     @Test
+    void buyingSixAThenDiscountIsAppliedTwice() {
+        Checkout checkout = new Checkout(
+                Catalogue.of(
+                        Sku.of("A"), Money.of(CurrencyUnit.USD, 50)));
+
+        checkout.scan(Sku.of("A"));
+        checkout.scan(Sku.of("A"));
+        checkout.scan(Sku.of("A"));
+        checkout.scan(Sku.of("A"));
+        checkout.scan(Sku.of("A"));
+        checkout.scan(Sku.of("A"));
+
+        assertThat(checkout.total()).isEqualTo(Money.of(CurrencyUnit.USD, 260));
+    }
+
+    @Test
     void buyingTwoBThenDiscountIsApplied() {
         Checkout checkout = new Checkout(
                 Catalogue.of(

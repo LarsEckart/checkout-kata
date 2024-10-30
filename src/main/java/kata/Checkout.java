@@ -30,7 +30,8 @@ class Checkout {
 
     private Money calculateDiscount(Cart cart, Sku sku, int quantity, Money discount) {
         if (cart.counts().containsKey(sku) && cart.counts().get(sku) >= quantity) {
-            return discount;
+            int times = cart.counts().get(sku) / quantity;
+            return discount.multipliedBy(times);
         }
         return Money.zero(CurrencyUnit.USD);
     }
