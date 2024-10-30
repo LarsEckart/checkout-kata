@@ -10,8 +10,10 @@ class CheckoutTest {
 
     @Test
     void buyingProductsThenTotalIsSumOfIndividualItems() {
-        Checkout checkout = new Checkout(Catalogue.of(Sku.of("A"), Money.of(CurrencyUnit.USD, 50),
-                Sku.of("B"), Money.of(CurrencyUnit.USD, 30)));
+        Checkout checkout = new Checkout(
+                Catalogue.of(
+                        Sku.of("A"), Money.of(CurrencyUnit.USD, 50),
+                        Sku.of("B"), Money.of(CurrencyUnit.USD, 30)));
 
         checkout.scan(Sku.of("A"));
         checkout.scan(Sku.of("A"));
