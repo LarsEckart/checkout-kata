@@ -25,6 +25,9 @@ class Checkout {
         if (cart.counts().containsKey(Sku.of("A")) && cart.counts().get(Sku.of("A")) >= 3) {
             total = total.minus(Money.of(CurrencyUnit.USD, 20));
         }
+        if (cart.counts().containsKey(Sku.of("B")) && cart.counts().get(Sku.of("B")) >= 2) {
+            total = total.minus(Money.of(CurrencyUnit.USD, 15));
+        }
         return total;
     }
 
