@@ -10,7 +10,7 @@ class CheckoutTest {
 
     @Test
     void buyOneAFor50() {
-        Checkout checkout = new Checkout();
+        Checkout checkout = new Checkout(Catalogue.of(Sku.of("A"), Money.of(CurrencyUnit.USD, 50)));
         checkout.scan(Sku.of("A"));
 
         assertThat(checkout.total()).isEqualTo(Money.of(CurrencyUnit.USD, 50));
@@ -18,10 +18,12 @@ class CheckoutTest {
 
     @Test
     void buyTwoAFor100() {
-        Checkout checkout = new Checkout();
+        Checkout checkout = new Checkout(Catalogue.of(Sku.of("A"), Money.of(CurrencyUnit.USD, 50)));
         checkout.scan(Sku.of("A"));
         checkout.scan(Sku.of("A"));
 
         assertThat(checkout.total()).isEqualTo(Money.of(CurrencyUnit.USD, 100));
     }
+
+
 }

@@ -2,15 +2,18 @@ package kata;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
 class Checkout {
 
-    private List<Sku> cart = new ArrayList<>();
-    private Map<Sku, Money> prices = Map.of(Sku.of("A"), Money.of(CurrencyUnit.USD, 50));
+    private final List<Sku> cart = new ArrayList<>();
+    public Catalogue catalogue;
+
+    public Checkout(Catalogue catalogue) {
+        this.catalogue = catalogue;
+    }
 
     public void scan(Sku sku) {
         cart.add(sku);
@@ -19,8 +22,9 @@ class Checkout {
     public Money total() {
         Money total = Money.zero(CurrencyUnit.USD);
         for (Sku sku : cart) {
-            total = total.plus(prices.get(sku));
+            total = total.plus(catalogue.getPriceFor(sku));
         }
         return total;
     }
+
 }
