@@ -22,6 +22,9 @@ class Checkout {
         for (Sku sku : cart) {
             total = total.plus(catalogue.getPriceFor(sku));
         }
+        if (cart.counts().containsKey(Sku.of("A")) && cart.counts().get(Sku.of("A")) >= 3) {
+            total = total.minus(Money.of(CurrencyUnit.USD, 20));
+        }
         return total;
     }
 

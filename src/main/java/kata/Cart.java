@@ -3,8 +3,12 @@ package kata;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
 
 public final class Cart implements Iterable<Sku> {
 
@@ -16,6 +20,11 @@ public final class Cart implements Iterable<Sku> {
 
     void addItem(Sku sku) {
         cart.add(sku);
+    }
+
+    public Map<Sku, Integer> counts() {
+        return cart.stream()
+                .collect(groupingBy(sku -> sku, summingInt(_ -> 1)));
     }
 
     @Override
