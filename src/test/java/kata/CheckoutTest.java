@@ -9,21 +9,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CheckoutTest {
 
     @Test
-    void buyOneAFor50() {
-        Checkout checkout = new Checkout(Catalogue.of(Sku.of("A"), Money.of(CurrencyUnit.USD, 50)));
-        checkout.scan(Sku.of("A"));
+    void buyingProductsThenTotalIsSumOfIndividualItems() {
+        Checkout checkout = new Checkout(Catalogue.of(Sku.of("A"), Money.of(CurrencyUnit.USD, 50),
+                Sku.of("B"), Money.of(CurrencyUnit.USD, 30)));
 
-        assertThat(checkout.total()).isEqualTo(Money.of(CurrencyUnit.USD, 50));
+        checkout.scan(Sku.of("A"));
+        checkout.scan(Sku.of("A"));
+        checkout.scan(Sku.of("B"));
+
+        assertThat(checkout.total()).isEqualTo(Money.of(CurrencyUnit.USD, 130));
     }
-
-    @Test
-    void buyTwoAFor100() {
-        Checkout checkout = new Checkout(Catalogue.of(Sku.of("A"), Money.of(CurrencyUnit.USD, 50)));
-        checkout.scan(Sku.of("A"));
-        checkout.scan(Sku.of("A"));
-
-        assertThat(checkout.total()).isEqualTo(Money.of(CurrencyUnit.USD, 100));
-    }
-
 
 }
