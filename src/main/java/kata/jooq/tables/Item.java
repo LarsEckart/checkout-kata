@@ -7,6 +7,7 @@ package kata.jooq.tables;
 import java.util.Collection;
 
 import kata.jooq.DefaultSchema;
+import kata.jooq.Keys;
 import kata.jooq.tables.records.ItemRecord;
 
 import org.jooq.Condition;
@@ -21,6 +22,7 @@ import org.jooq.Stringly;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
+import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
@@ -46,6 +48,11 @@ public class Item extends TableImpl<ItemRecord> {
     public Class<ItemRecord> getRecordType() {
         return ItemRecord.class;
     }
+
+    /**
+     * The column <code>Item.ID</code>.
+     */
+    public final TableField<ItemRecord, Integer> ID = createField(DSL.name("ID"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>Item.SKU</code>.
@@ -89,6 +96,11 @@ public class Item extends TableImpl<ItemRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : DefaultSchema.DEFAULT_SCHEMA;
+    }
+
+    @Override
+    public UniqueKey<ItemRecord> getPrimaryKey() {
+        return Keys.ITEM__PK_ITEM;
     }
 
     @Override

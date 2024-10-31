@@ -5,7 +5,9 @@ package kata.jooq;
 
 
 import kata.jooq.tables.FlywaySchemaHistory;
+import kata.jooq.tables.Item;
 import kata.jooq.tables.records.FlywaySchemaHistoryRecord;
+import kata.jooq.tables.records.ItemRecord;
 
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -25,4 +27,5 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY__PK_FLYWAY_SCHEMA_HISTORY = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("pk_flyway_schema_history"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
+    public static final UniqueKey<ItemRecord> ITEM__PK_ITEM = Internal.createUniqueKey(Item.ITEM, DSL.name("pk_Item"), new TableField[] { Item.ITEM.ID }, true);
 }
