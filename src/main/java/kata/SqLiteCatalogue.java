@@ -5,12 +5,10 @@ import java.sql.Connection;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.jooq.DSLContext;
-import org.jooq.Record1;
+import org.jooq.Record;
 import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
-
-import kata.jooq.tables.records.ItemRecord;
 
 import static kata.jooq.tables.Item.ITEM;
 
@@ -24,10 +22,12 @@ class SqLiteCatalogue implements Catalogue {
 
     @Override
     public Money getPriceFor(Sku sku) {
-        Result<Record1<ItemRecord>> fetch = dslContext.select(ITEM)
+        Result<Record> result = dslContext
+                .select()
                 .from(ITEM)
-                .where(ITEM.SKU.eq(sku.asString())).fetch();
+                .where(ITEM.SKU.eq(sku.asString()))
+                .fetch();
 
-        return fetch.isEmpty() ? null : Money.of(CurrencyUnit.USD, fetch.getFirst().value1().getPrice());
+        return Money.of(CurrencyUnit.USD, result.getFirst().get(ITEM.PRICE));
     }
 }
