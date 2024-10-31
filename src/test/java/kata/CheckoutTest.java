@@ -11,7 +11,7 @@ class CheckoutTest {
     @Test
     void buyingProductsThenTotalIsSumOfIndividualItems() {
         Checkout checkout = new Checkout(
-                Catalogue.of(
+                InMemoryCatalogue.of(
                         Sku.of("A"), Money.of(CurrencyUnit.USD, 50),
                         Sku.of("B"), Money.of(CurrencyUnit.USD, 30)),
                 Discounts.none());
@@ -26,7 +26,7 @@ class CheckoutTest {
     @Test
     void buyingThreeAThenDiscountIsApplied() {
         Checkout checkout = new Checkout(
-                Catalogue.of(
+                InMemoryCatalogue.of(
                         Sku.of("A"), Money.of(CurrencyUnit.USD, 50)), Discounts.of(
                 Discount.of(
                         Sku.of("A"), 3, Money.of(CurrencyUnit.USD, 20))));
@@ -41,7 +41,7 @@ class CheckoutTest {
     @Test
     void buyingSixAThenDiscountIsAppliedTwice() {
         Checkout checkout = new Checkout(
-                Catalogue.of(
+                InMemoryCatalogue.of(
                         Sku.of("A"), Money.of(CurrencyUnit.USD, 50)), Discounts.of(
                 Discount.of(Sku.of("A"), 3, Money.of(CurrencyUnit.USD, 20))));
 
@@ -58,7 +58,7 @@ class CheckoutTest {
     @Test
     void buyingTwoBThenDiscountIsApplied() {
         Checkout checkout = new Checkout(
-                Catalogue.of(
+                InMemoryCatalogue.of(
                         Sku.of("B"), Money.of(CurrencyUnit.USD, 30)), Discounts.of(
                 Discount.of(Sku.of("B"), 2, Money.of(CurrencyUnit.USD, 15))));
 
@@ -72,7 +72,7 @@ class CheckoutTest {
     @Test
     void end2end() {
         Checkout checkout = new Checkout(
-                Catalogue.of(
+                InMemoryCatalogue.of(
                         Sku.of("A"), Money.of(CurrencyUnit.USD, 50),
                         Sku.of("B"), Money.of(CurrencyUnit.USD, 30)), Discounts.of(
                 Discount.of(Sku.of("A"), 3, Money.of(CurrencyUnit.USD, 20)),

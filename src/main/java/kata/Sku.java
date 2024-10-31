@@ -14,6 +14,10 @@ public final class Sku {
         return new Sku(raw);
     }
 
+    public String asString() {
+        return code;
+    }
+
     @Override
     public boolean equals(Object o) {
         return o == this || (o instanceof Sku sku) && Objects.equals(code, sku.code);
