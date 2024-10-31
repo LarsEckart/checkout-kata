@@ -8,12 +8,12 @@ public final class InMemoryCatalogue implements Catalogue {
 
     private final Map<Sku, Money> prices;
 
-    private InMemoryCatalogue(Sku sku, Money money) {
-        this.prices = Map.of(sku, money);
-    }
-
     private InMemoryCatalogue(Map<Sku, Money> sku) {
         this.prices = sku;
+    }
+
+    private InMemoryCatalogue(Sku sku, Money money) {
+        this(Map.of(sku, money));
     }
 
     public static Catalogue of(Sku sku, Money money) {

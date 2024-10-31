@@ -4,7 +4,8 @@
 package kata.jooq;
 
 
-import kata.jooq.tables.Items;
+import kata.jooq.tables.FlywaySchemaHistory;
+import kata.jooq.tables.Item;
 
 
 /**
@@ -14,7 +15,12 @@ import kata.jooq.tables.Items;
 public class Tables {
 
     /**
-     * The table <code>Items</code>.
+     * The table <code>flyway_schema_history</code>.
      */
-    public static final Items ITEMS = Items.ITEMS;
+    public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
+
+    /**
+     * The table <code>Item</code>.
+     */
+    public static final Item ITEM = Item.ITEM;
 }

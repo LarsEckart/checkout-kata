@@ -7,7 +7,8 @@ package kata.jooq;
 import java.util.Arrays;
 import java.util.List;
 
-import kata.jooq.tables.Items;
+import kata.jooq.tables.FlywaySchemaHistory;
+import kata.jooq.tables.Item;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
@@ -28,9 +29,14 @@ public class DefaultSchema extends SchemaImpl {
     public static final DefaultSchema DEFAULT_SCHEMA = new DefaultSchema();
 
     /**
-     * The table <code>Items</code>.
+     * The table <code>flyway_schema_history</code>.
      */
-    public final Items ITEMS = Items.ITEMS;
+    public final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
+
+    /**
+     * The table <code>Item</code>.
+     */
+    public final Item ITEM = Item.ITEM;
 
     /**
      * No further instances allowed
@@ -48,7 +54,8 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            Items.ITEMS
+            FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
+            Item.ITEM
         );
     }
 }

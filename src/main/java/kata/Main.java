@@ -2,7 +2,6 @@ package kata;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
 
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
@@ -26,16 +25,7 @@ class Main {
     }
 
     public static void withSqlite() throws Exception {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
-                Statement statement = connection.createStatement()) {
-            statement.setQueryTimeout(30);  // set timeout to 30 sec.
-
-            statement.executeUpdate("drop table if exists Items");
-            statement.executeUpdate("create table Items (sku TEXT, price INTEGER)");
-            statement.executeUpdate("insert into Items values( 'A', 50)");
-            statement.executeUpdate("insert into Items values( 'B', 30)");
-            statement.executeUpdate("insert into Items values( 'C', 20)");
-            statement.executeUpdate("insert into Items values( 'D', 15)");
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:file:checkout.db")) {
 
             Catalogue catalogue = new SqLiteCatalogue(connection);
 
