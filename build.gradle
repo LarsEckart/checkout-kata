@@ -116,3 +116,11 @@ jooq {
         }
     }
 }
+
+tasks.named("jooqCodegen") {
+    dependsOn tasks.named("flywayMigrate")
+}
+
+tasks.named("compileJava") {
+    dependsOn tasks.named("jooqCodegen")
+}
