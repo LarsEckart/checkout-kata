@@ -17,11 +17,12 @@ dependencies {
 
     implementation("org.joda:joda-money:2.0.1")
 
-    testImplementation(platform("org.junit:junit-bom:5.11.4"))
+    testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.assertj:assertj-core:3.27.3")
     testImplementation("com.approvaltests:approvaltests:25.0.23")
-    testImplementation("com.larseckart:junit-tcr-extensions:0.0.3")
+    testImplementation("com.larseckart:junit-tcr-extensions:1.0.0")
     testImplementation("org.mockito:mockito-core:5.18.0")
     testImplementation("org.mockito:mockito-junit-jupiter:5.18.0")
 }
@@ -33,6 +34,7 @@ tasks.withType(JavaCompile) {
 
 test {
     useJUnitPlatform()
+    failOnNoDiscoveredTests = false
     testLogging {
         events "passed", "skipped", "failed"
     }
