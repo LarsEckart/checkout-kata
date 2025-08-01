@@ -5,6 +5,10 @@ updates:
     schedule:
       interval: "daily"
       time: "02:00"
+    groups:
+      mockito:
+        patterns:
+          - "org.mockito:*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
