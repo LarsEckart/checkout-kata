@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
 
-    implementation("org.joda:joda-money:2.0.1")
+    implementation("org.joda:joda-money:2.0.2")
 
     testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
