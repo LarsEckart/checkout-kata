@@ -1,8 +1,5 @@
 package kata;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 
 import org.joda.money.CurrencyUnit;
