@@ -1,13 +1,22 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.flywaydb:flyway-core:11.1.1")
+        classpath("org.xerial:sqlite-jdbc:3.47.0.0")
+    }
+}
+
 plugins {
     id 'java'
     id 'application'
     id "org.jooq.jooq-codegen-gradle" version "3.19.14"
-    id("org.flywaydb.flyway") version "10.20.1"
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -20,6 +29,7 @@ dependencies {
 
 
     implementation("org.joda:joda-money:2.0.0")
+    implementation("org.flywaydb:flyway-core:11.1.1")
     implementation 'org.jooq:jooq:3.19.14'
     implementation 'org.jooq:jooq-meta:3.19.14'
     implementation 'org.jooq:jooq-codegen:3.19.14'
@@ -31,7 +41,8 @@ dependencies {
     testImplementation("com.larseckart:junit-tcr-extensions:0.0.3")
     testImplementation("org.mockito:mockito-core:5.14.2")
     testImplementation("org.mockito:mockito-junit-jupiter:5.14.2")
-    testImplementation("org.flywaydb:flyway-core:10.20.1")
+    testImplementation("org.flywaydb:flyway-core:11.1.1")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     jooqCodegen("org.xerial:sqlite-jdbc:3.47.0.0")
 }
@@ -50,10 +61,6 @@ test {
 
 application {
     mainClass = 'kata.Main'
-}
-
-flyway {
-    url = 'jdbc:sqlite:file:checkout.db'
 }
 
 jooq {
@@ -124,4 +131,18 @@ tasks.named("jooqCodegen") {
 
 tasks.named("compileJava") {
     dependsOn tasks.named("jooqCodegen")
+}
+
+tasks.register("flywayMigrate") {
+    group = "database"
+    description = "Migrates the local SQLite schema using Flyway"
+
+    doLast {
+        def migrationsDir = file("src/main/resources/db/migration").absolutePath
+        org.flywaydb.core.Flyway.configure()
+                .dataSource("jdbc:sqlite:file:checkout.db", null, null)
+                .locations("filesystem:${migrationsDir}")
+                .load()
+                .migrate()
+    }
 }
