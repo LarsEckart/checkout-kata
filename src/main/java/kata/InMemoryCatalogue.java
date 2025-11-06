@@ -26,7 +26,11 @@ public final class InMemoryCatalogue implements Catalogue {
 
     @Override
     public Money getPriceFor(Sku sku) {
-        return prices.get(sku);
+        Money price = prices.get(sku);
+        if (price != null) {
+            return price;
+        }
+        throw new ItemNotFoundException("No price configured for " + sku);
     }
 
     @Override

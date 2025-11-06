@@ -30,6 +30,9 @@ class SqLiteCatalogue implements Catalogue {
                 .from(ITEM)
                 .where(ITEM.SKU.eq(sku.asString()))
                 .fetch();
+        if (result.isEmpty()) {
+            throw new ItemNotFoundException("No price configured for " + sku);
+        }
 
         return Money.of(CurrencyUnit.USD, result.getFirst().get(ITEM.PRICE));
     }
